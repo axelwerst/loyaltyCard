@@ -1,12 +1,10 @@
-
 openapi: 3.0.0
 info:
   title: Loyalty Card
   description: API для управления клиентами, картами лояльности, транзакциями и администраторами.
   version: 1.0.0
 servers:
-  - url: https://api.example.com
-    description: Основной сервер
+  - url: http://localhost:8080
 
 paths:
   /customers:
@@ -17,33 +15,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: Иван Иванов
-                phone:
-                  type: string
-                  example: +1234567890
-                email:
-                  type: string
-                  example: example@email.com
-              required:
-                - name
-                - phone
-                - email
+              $ref: '#/components/schemas/NewCustomer'
       responses:
         '201':
           description: Клиент успешно создан
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customerID:
-                    type: integer
-                  message:
-                    type: string
+                $ref: '#/components/schemas/CreateCustomerResponse'
 
   /customers/{customerID}:
     get:
@@ -53,23 +32,14 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Информация о клиенте
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customerID:
-                    type: integer
-                  name:
-                    type: string
-                  phone:
-                    type: string
-                  email:
-                    type: string
+                $ref: '#/components/schemas/Customer'
     put:
       summary: Обновить данные клиента
       parameters:
@@ -77,30 +47,20 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                phone:
-                  type: string
-                email:
-                  type: string
+              $ref: '#/components/schemas/UpdateCustomer'
       responses:
         '200':
           description: Клиент обновлен
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                $ref: '#/components/schemas/UpdateCustomerResponse'
     delete:
       summary: Удалить клиента
       parameters:
@@ -108,17 +68,14 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Клиент удален
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                $ref: '#/components/schemas/DeleteCustomerResponse'
 
   /loyalty-cards:
     post:
@@ -128,26 +85,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                customerID:
-                  type: integer
-              required:
-                - customerID
+              $ref: '#/components/schemas/NewLoyaltyCard'
       responses:
         '201':
           description: Карта успешно создана
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  cardID:
-                    type: integer
-                  QRCode:
-                    type: string
-                  message:
-                    type: string
+                $ref: '#/components/schemas/CreateLoyaltyCardResponse'
 
   /loyalty-cards/{cardID}:
     get:
@@ -164,17 +109,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  cardID:
-                    type: integer
-                  customerID:
-                    type: integer
-                  QRCode:
-                    type: string
-                  balance:
-                    type: number
-                    format: float
+                $ref: '#/components/schemas/LoyaltyCard'
 
   /loyalty-cards/{cardID}/balance:
     put:
@@ -190,32 +125,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                amount:
-                  type: number
-                  format: float
-                  example: 100.5
-                operation:
-                  type: string
-                  enum: [add, subtract]
-                  example: add
-                reason:
-                  type: string
-                  example: Награда за покупку
+              $ref: '#/components/schemas/UpdateBalance'
       responses:
         '200':
           description: Баланс успешно обновлен
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  newBalance:
-                    type: number
-                    format: float
+                $ref: '#/components/schemas/UpdateBalanceResponse'
 
   /transactions:
     get:
@@ -232,22 +149,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    transactionID:
-                      type: integer
-                    cardID:
-                      type: integer
-                    amount:
-                      type: number
-                      format: float
-                    reason:
-                      type: string
-                    date:
-                      type: string
-                      format: date-time
+                $ref: '#/components/schemas/TransactionHistory'
 
   /admins/login:
     post:
@@ -257,22 +159,162 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
+              $ref: '#/components/schemas/AdminLogin'
       responses:
         '200':
           description: Авторизация успешна
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                  role:
-                    type: string
-                    enum: [manager, employee]
+                $ref: '#/components/schemas/AdminLoginResponse'
+
+components:
+  schemas:
+    NewCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Иван Иванов
+        phone:
+          type: string
+          example: +1234567890
+        email:
+          type: string
+          example: example@email.com
+      required:
+        - name
+        - phone
+        - email
+
+    Customer:
+      type: object
+      properties:
+        customerID:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+
+    UpdateCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+
+    CreateCustomerResponse:
+      type: object
+      properties:
+        customerID:
+          type: integer
+        message:
+          type: string
+
+    UpdateCustomerResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    DeleteCustomerResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    NewLoyaltyCard:
+      type: object
+      properties:
+        customerID:
+          type: integer
+      required:
+        - customerID
+
+    CreateLoyaltyCardResponse:
+      type: object
+      properties:
+        cardID:
+          type: integer
+        QRCode:
+          type: string
+        message:
+          type: string
+
+    LoyaltyCard:
+      type: object
+      properties:
+        cardID:
+          type: integer
+        customerID:
+          type: string
+        QRCode:
+          type: string
+        balance:
+          type: number
+          format: float
+
+    UpdateBalance:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: float
+          example: 100.5
+        operation:
+          type: string
+          enum: [add, subtract]
+          example: add
+        reason:
+          type: string
+          example: Награда за покупку
+
+    UpdateBalanceResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        newBalance:
+          type: number
+          format: float
+
+    TransactionHistory:
+      type: array
+      items:
+        type: object
+        properties:
+          transactionID:
+            type: integer
+          cardID:
+            type: integer
+          amount:
+            type: number
+            format: float
+          reason:
+            type: string
+          date:
+            type: string
+            format: date-time
+
+    AdminLogin:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        role:
+          type: string
+          enum: [manager, employee]
