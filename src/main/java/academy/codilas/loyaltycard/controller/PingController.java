@@ -1,4 +1,4 @@
-package academy.codilas.LoyaltyCard.controller;
+package academy.codilas.loyaltycard.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

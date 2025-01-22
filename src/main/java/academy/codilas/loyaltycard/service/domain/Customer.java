@@ -1,15 +1,16 @@
-package academy.codilas.LoyaltyCard.controller.DTO;
+package academy.codilas.loyaltycard.service.domain;
 
-public class CustomerDTO {
+public class Customer {
     private String id;
     private String name;
     private String phone;
     private String email;
 
-    public CustomerDTO() {
+    public Customer() {
 
     }
-    public CustomerDTO(String id, String name, String phone, String email) {
+
+    public Customer(String id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;

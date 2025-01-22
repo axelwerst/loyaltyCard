@@ -1,4 +1,4 @@
-package academy.codilas.LoyaltyCard.controller.DTO;
+package academy.codilas.loyaltycard.controller.DTO;
 
 import java.util.Objects;
 
