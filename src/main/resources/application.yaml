@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: LoyaltyCard
+    datasours: org.postgresql.Driver
+    username: postgres
+    url:
