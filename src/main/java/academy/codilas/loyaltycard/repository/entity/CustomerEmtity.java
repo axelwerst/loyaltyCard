@@ -1,11 +1,10 @@
 package academy.codilas.loyaltycard.repository.entity;
 
 import jakarta.persistence.*;
-import org.springframework.aot.generate.Generated;
 
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class CustomerEmtity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "customerid")

@@ -1,6 +1,12 @@
 spring:
   application:
     name: LoyaltyCard
-    datasours: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://localhost:5432/LoyaltyCard
     username: postgres
-    url:
+    password: postgres_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

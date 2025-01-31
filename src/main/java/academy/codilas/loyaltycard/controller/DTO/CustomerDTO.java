@@ -1,5 +1,7 @@
 package academy.codilas.loyaltycard.controller.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CustomerDTO {
     private String id;
     private String name;
@@ -9,6 +11,7 @@ public class CustomerDTO {
     public CustomerDTO() {
 
     }
+
     public CustomerDTO(String id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
@@ -20,10 +23,12 @@ public class CustomerDTO {
         return id;
     }
 
+    @JsonProperty
     public String getPhone() {
         return phone;
     }
 
+    @JsonProperty
     public String getName() {
         return name;
     }

@@ -2,6 +2,3 @@ databaseChangeLog:
   - include:
       file: 001-create-schema.sql
       relativeToChangelogFile: true
-  - include:
-      file: 003-create-table-student.yaml
-      relativeToChangelogFile: true

@@ -1,6 +1,7 @@
 package academy.codilas.loyaltycard.util.mapper;
 
 import academy.codilas.loyaltycard.controller.DTO.CustomerDTO;
+import academy.codilas.loyaltycard.repository.entity.CustomerEmtity;
 import academy.codilas.loyaltycard.service.domain.Customer;
 import org.springframework.stereotype.Component;
 
@@ -23,16 +24,12 @@ public class CustomerMapperImpl implements CustomerMapper {
     }
 
     @Override
-    public Customer toDomain(CustomerDTO customerDTO) {
-        if (customerDTO == null) {
-            return null;
-        }
-
-        Customer customer = new Customer();
-        customer.setId(customerDTO.getId());
-        customer.setName(customerDTO.getName());
-        customer.setPhone(customerDTO.getPhone());
-        customer.setEmail(customerDTO.getEmail());
+    public Customer toDomain(CustomerEmtity customerEmtity) {
+    Customer customer = new Customer();
+    customer.setId(customerEmtity.getId().toString());
+    customer.setName(customerEmtity.getName());
+    customer.setPhone(customerEmtity.getPhone());
+    customer.setEmail(customerEmtity.getEmail());
 
         return customer;
     }

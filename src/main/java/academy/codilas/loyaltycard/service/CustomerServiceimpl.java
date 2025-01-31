@@ -2,7 +2,11 @@ package academy.codilas.loyaltycard.service;
 
 
 import academy.codilas.loyaltycard.exception.CustomerNotFoundExeption;
+import academy.codilas.loyaltycard.repository.CustomerRepository;
+import academy.codilas.loyaltycard.repository.entity.CustomerEmtity;
 import academy.codilas.loyaltycard.service.domain.Customer;
+import academy.codilas.loyaltycard.util.mapper.CustomerMapper;
+import academy.codilas.loyaltycard.util.mapper.CustomerMapperImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,12 +15,17 @@ import java.util.*;
 @Service
 public class CustomerServiceimpl implements CustomerService {
 
-    private Map<String, Customer> customersMap = new HashMap();
+    private Map<String, Customer> customersMap;
+    private final CustomerRepository customerRepository;
 
-//    @Override
-//    public Customer newCustomer(String id, String name, String email, String phoneNumber) {
-//        return null;
-//    }
+    private CustomerMapper customerMapper;
+
+    public CustomerServiceimpl(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+        this.customerRepository = customerRepository;
+        this.customersMap = new HashMap<>();
+        this.customerMapper = new CustomerMapperImpl();
+    }
+
 
     @Override
     public Customer newCustomer(String name, String email, String phone) {
@@ -51,11 +60,13 @@ public class CustomerServiceimpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(String id) throws CustomerNotFoundExeption {
-        Customer customer = customersMap.get(id);
-        if (customer == null) {
-            throw new CustomerNotFoundExeption("Клиент с айди " + id + " ненайден");
+        Optional<CustomerEmtity> optionalCustomerEmtity = customerRepository.findById(UUID.fromString(id));
+        if (optionalCustomerEmtity.isPresent()) {
+            return customerMapper.toDomain(optionalCustomerEmtity.get());
         }
-        return null;
+
+
+        throw new CustomerNotFoundExeption("Клиент с айди " + id + " ненайден");
     }
 
 
@@ -67,11 +78,11 @@ public class CustomerServiceimpl implements CustomerService {
             throw new CustomerNotFoundExeption("Клиент с ID " + customerId + " не найден");
         }
 
-            existingCustomer.setName(name);
-            existingCustomer.setEmail(email);
-            existingCustomer.setPhone(phone);
-            customersMap.put(customerId, existingCustomer);
-            return existingCustomer;
-        }
+        existingCustomer.setName(name);
+        existingCustomer.setEmail(email);
+        existingCustomer.setPhone(phone);
+        customersMap.put(customerId, existingCustomer);
+        return existingCustomer;
+    }
 }
 
