@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/LoyaltyCard
     username: postgres
-    password: postgres_password
+    password: ${DATABASE_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
