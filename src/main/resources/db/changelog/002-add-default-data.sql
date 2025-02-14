@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
--- changeset nikita.mykhailov:2
+
 
 INSERT INTO Customers (CustomerID, Name, Phone, Email)
 VALUES

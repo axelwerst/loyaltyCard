@@ -1,7 +1,10 @@
 databaseChangeLog:
   - include:
-      file: 001-create-schema.sql
+      file: db/changelog/001-create-schema.sql
       relativeToChangelogFile: true
   - include:
-      file: 002-default-data.sql
+      file: db/changelog/002-add-default-data.sql
+      relativeToChangelogFile: true
+  - include:
+      file: db/changelog/003-add-password-to-person.sql
       relativeToChangelogFile: true
