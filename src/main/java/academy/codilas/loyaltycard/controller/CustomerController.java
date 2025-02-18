@@ -6,7 +6,9 @@ import academy.codilas.loyaltycard.controller.DTO.NewCustomerDTO;
 import academy.codilas.loyaltycard.exception.CustomerNotFoundExeption;
 import academy.codilas.loyaltycard.service.CustomerService;
 import academy.codilas.loyaltycard.service.domain.Customer;
-import academy.codilas.loyaltycard.util.mapper.CustomerMapper;
+import academy.codilas.loyaltycard.mapper.CustomerMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
 

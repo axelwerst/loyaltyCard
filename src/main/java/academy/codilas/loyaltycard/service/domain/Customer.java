@@ -1,12 +1,14 @@
 package academy.codilas.loyaltycard.service.domain;
 
+import java.util.UUID;
+
 public class Customer {
     private String id;
     private String name;
     private String phone;
     private String email;
 
-    public Customer() {
+    public Customer(UUID id, String johnDoe, String mail, String number) {
 
     }
 

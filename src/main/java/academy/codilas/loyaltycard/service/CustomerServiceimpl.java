@@ -3,10 +3,10 @@ package academy.codilas.loyaltycard.service;
 
 import academy.codilas.loyaltycard.exception.CustomerNotFoundExeption;
 import academy.codilas.loyaltycard.repository.CustomerRepository;
-import academy.codilas.loyaltycard.repository.entity.CustomerEmtity;
+import academy.codilas.loyaltycard.repository.entity.CustomerEntity;
 import academy.codilas.loyaltycard.service.domain.Customer;
-import academy.codilas.loyaltycard.util.mapper.CustomerMapper;
-import academy.codilas.loyaltycard.util.mapper.CustomerMapperImpl;
+import academy.codilas.loyaltycard.mapper.CustomerMapper;
+import academy.codilas.loyaltycard.mapper.CustomerMapperImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,7 +32,7 @@ public class CustomerServiceimpl implements CustomerService {
 
         String id = UUID.randomUUID().toString();
 
-        Customer customer = new Customer();
+        Customer customer = new Customer(id, "John Doe", "john.doe@example.com", "1234567890");
         customer.setId(id);
         customer.setName(name);
         customer.setEmail(email);
@@ -60,9 +60,9 @@ public class CustomerServiceimpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(String id) throws CustomerNotFoundExeption {
-        Optional<CustomerEmtity> optionalCustomerEmtity = customerRepository.findById(UUID.fromString(id));
-        if (optionalCustomerEmtity.isPresent()) {
-            return customerMapper.toDomain(optionalCustomerEmtity.get());
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(UUID.fromString(id));
+        if (optionalCustomerEntity.isPresent()) {
+            return customerMapper.toDomain(optionalCustomerEntity.get());
         }
 
 

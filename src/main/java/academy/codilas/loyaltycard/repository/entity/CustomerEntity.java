@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customer")
-public class CustomerEmtity {
+public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "customerid")
@@ -15,6 +15,16 @@ public class CustomerEmtity {
     private String phone;
     @Column
     private String email;
+    public CustomerEntity(String id, String name, String email, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public CustomerEntity() {
+
+    }
 
     public String getId() {
         return id;
