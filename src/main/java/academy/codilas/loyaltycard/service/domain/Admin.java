@@ -1,3 +1,5 @@
+package academy.codilas.loyaltycard.service.domain;
+
 import java.util.UUID;
 
 public class Admin {
