@@ -61,28 +61,28 @@ public class AdminController {
 //        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 //    }
 
-    @PostMapping
-    public ResponseEntity<AdminDTO> NewAdmin(@RequestBody AdminDTO adminDTO) {
-       adminService.newAdmin(adminDTO.getEmail(), adminDTO.getAdminName());
-        return ResponseEntity.
-                status(HttpStatus.CREATED)
-                .body(adminDTO);
-    }
-
-    @PutMapping("/{adminId}")
-    public ResponseEntity<AdminDTO> updateAdmin(
-            @PathVariable String adminId,
-            @RequestBody NewAdminDTO updatedAdminDTO) throws AdminNotFoundException {
-       Admin updatedAdmin = adminService.updateAdmin(
-                updateAddminDTO.getAdminName(),
-                updatedAdminDTO.getEmail(),
-                adminId
-        );
-        AdminDTO updatedAdminDTOResponse = adminMapper.toDTO(updatedAdmin);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(updatedAdminDTOResponse);
-    }
+//    @PostMapping
+//    public ResponseEntity<AdminDTO> NewAdmin(@RequestBody AdminDTO adminDTO) {
+//       adminService.newAdmin(adminDTO.getEmail(), adminDTO.getAdminName());
+//        return ResponseEntity.
+//                status(HttpStatus.CREATED)
+//                .body(adminDTO);
+//    }
+//
+//    @PutMapping("/{adminId}")
+//    public ResponseEntity<AdminDTO> updateAdmin(
+//            @PathVariable String adminId,
+//            @RequestBody NewAdminDTO updatedAdminDTO) throws AdminNotFoundException {
+//       Admin updatedAdmin = adminService.updateAdmin(
+//                updateAddminDTO.getAdminName(),
+//                updatedAdminDTO.getEmail(),
+//                adminId
+//        );
+//        AdminDTO updatedAdminDTOResponse = adminMapper.toDTO(updatedAdmin);
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(updatedAdminDTOResponse);
+//    }
 
     @ExceptionHandler(AdminNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleAdminNotFoundException(AdminNotFoundException e) {

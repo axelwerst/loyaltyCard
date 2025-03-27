@@ -18,12 +18,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+
     private final AdminService adminService;
     private final AdminMapper adminMapper;
     private final LoginService loginService;
@@ -39,7 +41,7 @@ public class AuthController {
     @PostMapping("/sign-up")
     public ResponseEntity<Void> signUp(@RequestBody AdminDTO adminDTO) {
 
-       Admin admin = adminMapper.toDomain(adminDTO);
+        Admin admin = adminMapper.toDomain(adminDTO);
 
         try {
             adminService.createAdmin(admin);
@@ -47,7 +49,7 @@ public class AuthController {
             log.error(
                     "Error creating admin with email {} and first name {}.",
                     adminDTO.getEmail(),
-                   adminDTO.getName());
+                    adminDTO.getName(), e);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);

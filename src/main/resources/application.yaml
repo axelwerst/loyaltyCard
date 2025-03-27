@@ -4,9 +4,14 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/LoyaltyCard
     username: postgres
-    password: ${DATABASE_PASS}
+    password: ${DATABASE_PASS:}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  # Use the JWT_SECRET environment variable if set, otherwise use 'e0de953b-72ab-474c-8fb8-bed8a6128ba1'
+  secret: ${JWT_SECRET:e0de953b-72ab-474c-8fb8-bed8a6128ba1}
+  ttl-millis: 43200000

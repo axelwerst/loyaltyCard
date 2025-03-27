@@ -6,16 +6,16 @@ import java.util.UUID;
 public class Admin {
 
     private UUID id;
-    private String adminName;
+    private String name;
     private String email;
     private String password;
 
     public Admin() {
     }
 
-    public Admin(UUID id,  String adminName, String email, String password) {
+    public Admin(UUID id, String name, String email, String password) {
         this.id = id;
-        this.adminName = adminName;
+        this.name = name;
         this.email = email;
         this.password = password;
     }
@@ -28,14 +28,12 @@ public class Admin {
         this.id = id;
     }
 
-
-    public void getAdminName(String adminName) {
-        this.adminName = adminName;
+    public String getName() {
+        return name;
     }
 
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -55,19 +53,15 @@ public class Admin {
     }
 
     public void update(Admin admin) {
-        this.adminName = admin.getAdminName();
-        this.email = admin.getEmail();
-    }
-
-    private String getName() {
-        return adminName;
+//        this.adminName = admin.getAdminName();
+//        this.email = admin.getEmail();
     }
 
     @Override
     public String toString() {
         return "Admin{"
                 + "id='" + id + '\''
-                + ", Name='" + adminName + '\''
+                + ", name='" + name + '\''
                 + ", email='" + email + '\''
                 + '}';
     }
@@ -79,7 +73,7 @@ public class Admin {
         }
         Admin admin = (Admin) o;
         return Objects.equals(id, admin.id)
-                && Objects.equals(adminName, admin.adminName)
+                && Objects.equals(name, admin.name)
                 && Objects.equals(email, admin.email);
     }
 

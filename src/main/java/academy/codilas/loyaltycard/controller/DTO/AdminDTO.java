@@ -3,8 +3,11 @@ package academy.codilas.loyaltycard.controller.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.UUID;
+
 public class AdminDTO {
-    private String id;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private UUID id;
     private String name;
     private String email;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -14,16 +17,15 @@ public class AdminDTO {
 
     }
 
-    public AdminDTO(String id, String name, String email,String password) {
+    public AdminDTO(UUID id, String name, String email,String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-
     }
 
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -39,7 +41,7 @@ public class AdminDTO {
         return password;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

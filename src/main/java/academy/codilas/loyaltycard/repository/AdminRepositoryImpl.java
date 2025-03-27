@@ -27,7 +27,7 @@ public class AdminRepositoryImpl implements AdminRepository {
     public Admin save(Admin admin) {
         AdminEntity adminEntity = adminMapper.toEntity(admin);
 
-        adminEntity savedAdminEntity = adminJpaRepository.save(adminEntity);
+        AdminEntity savedAdminEntity = adminJpaRepository.save(adminEntity);
 
         return adminMapper.toDomain(savedAdminEntity);
     }
@@ -43,8 +43,8 @@ public class AdminRepositoryImpl implements AdminRepository {
     }
 
     @Override
-    public Optional<Admin> findByEmailIgnoreCase(String email) {
-        return adminJpaRepository.findByEmail(email.toLowerCase()).map(adminMapper::toDomain);
+    public Optional<Admin> findByEmail(String email) {
+        return adminJpaRepository.findByEmail(email).map(adminMapper::toDomain);
     }
 
     @Override

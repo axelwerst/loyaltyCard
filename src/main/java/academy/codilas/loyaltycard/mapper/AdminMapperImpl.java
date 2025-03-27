@@ -17,24 +17,60 @@ public class AdminMapperImpl implements AdminMapper {
         }
 
         AdminDTO adminDTO = new AdminDTO();
+
         adminDTO.setId(admin.getId());
         adminDTO.setName(admin.getName());
         adminDTO.setEmail(admin.getEmail());
+        adminDTO.setPassword(admin.getPassword());
 
         return adminDTO;
     }
 
     @Override
-    public Admin toDomain(AdminEntity adminEntity) {
+    public Admin toDomain(AdminDTO adminDTO) {
+        if (adminDTO == null) {
+            return null;
+        }
 
+        Admin admin = new Admin();
+
+        admin.setId(adminDTO.getId());
+        admin.setEmail(adminDTO.getEmail());
+        admin.setName(adminDTO.getName());
+        admin.setPassword(adminDTO.getPassword());
+
+        return admin;
+    }
+
+    @Override
+    public Admin toDomain(AdminEntity adminEntity) {
         if (adminEntity == null) {
             return null;
         }
 
-        Admin admin = new Admin(String.valueOf(id), "John Doe", "john.doe@example.com", "1234567890");
-        admin.setAdminName(adminEntity.getAdminName());
+        Admin admin = new Admin();
+
+        admin.setId(adminEntity.getId());
         admin.setEmail(adminEntity.getEmail());
+        admin.setName(adminEntity.getName());
+        admin.setPassword(adminEntity.getPassword());
 
         return admin;
+    }
+
+    @Override
+    public AdminEntity toEntity(Admin admin) {
+        if (admin == null) {
+            return null;
+        }
+
+        AdminEntity adminEntity = new AdminEntity();
+
+        adminEntity.setId(admin.getId());
+        adminEntity.setEmail(admin.getEmail());
+        adminEntity.setName(admin.getName());
+        adminEntity.setPassword(admin.getPassword());
+
+        return adminEntity;
     }
 }

@@ -69,21 +69,21 @@ public class CustomerController {
                 .body(customerDTO);
     }
 
-    @PutMapping("/{customerId}")
-    public ResponseEntity<CustomerDTO> updateCustomer(
-            @PathVariable String customerId,
-            @RequestBody NewCustomerDTO updatedCustomerDTO) throws CustomerNotFoundException {
-        Customer updatedCustomer = customerService.updateCustomer(
-                updatedCustomerDTO.getName(),
-                updatedCustomerDTO.getEmail(),
-                updatedCustomerDTO.getPhone(),
-                customerId
-        );
-        CustomerDTO updatedCustomerDTOResponse = customerMapper.toDTO(updatedCustomer);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(updatedCustomerDTOResponse);
-    }
+//    @PutMapping("/{customerId}")
+//    public ResponseEntity<CustomerDTO> updateCustomer(
+//            @PathVariable String customerId,
+//            @RequestBody NewCustomerDTO updatedCustomerDTO) throws CustomerNotFoundException {
+//        Customer updatedCustomer = customerService.updateCustomer(
+//                updatedCustomerDTO.getName(),
+//                updatedCustomerDTO.getEmail(),
+//                updatedCustomerDTO.getPhone(),
+//                customerId
+//        );
+//        CustomerDTO updatedCustomerDTOResponse = customerMapper.toDTO(updatedCustomer);
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(updatedCustomerDTOResponse);
+//    }
 
     @ExceptionHandler(CustomerNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleCustomerNotFoundException(CustomerNotFoundException e) {

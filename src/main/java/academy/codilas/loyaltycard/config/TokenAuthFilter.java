@@ -49,7 +49,7 @@ public class TokenAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        String id = tokenService.getCustomerId(jwt);
+        String id = tokenService.getAdminId(jwt);
 
         UserDetails userDetails = new User(id, jwt, Collections.emptyList());
 

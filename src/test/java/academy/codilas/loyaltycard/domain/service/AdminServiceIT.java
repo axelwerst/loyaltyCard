@@ -119,12 +119,12 @@ class AdminServiceIT {
     void shouldRetrieveAllAdmins() {
         // given: create two persons
         Admin admin1 = new Admin();
-        admin1.setAdminName(" Name 1");
+        admin1.setName(" Name 1");
         admin1.setEmail("person1@example.com");
         admin1.setPassword("pass1");
 
         Admin admin2 = new Admin();
-        admin2.setAdminName(" Name 2");
+        admin2.setName(" Name 2");
         admin2.setEmail("person2@example.com");
         admin2.setPassword("pass2");
 

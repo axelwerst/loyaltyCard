@@ -42,11 +42,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findByEmailIgnoreCase(String email) {
-        return customerJpaRepository.findByEmail(email.toLowerCase()).map(customerMapper::toDomain);
-    }
-
-    @Override
     public void delete(Customer customer) {
         customerJpaRepository.deleteById(customer.getId());
     }

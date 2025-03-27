@@ -7,11 +7,11 @@ import academy.codilas.loyaltycard.repository.entity.AdminEntity;
 
 public interface AdminMapper {
 
-   AdminDTO toDTO(Admin admin);
+    AdminDTO toDTO(Admin admin);
 
     Admin toDomain(AdminDTO adminDTO);
 
-  Admin toDomain(AdminEntity adminEntity);
+    Admin toDomain(AdminEntity adminEntity);
 
     AdminEntity toEntity(Admin admin);
 }

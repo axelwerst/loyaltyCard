@@ -1,5 +1,6 @@
 package academy.codilas.loyaltycard.domain.service;
 
+import academy.codilas.loyaltycard.domain.model.Admin;
 import academy.codilas.loyaltycard.domain.repository.AdminRepository;
 import academy.codilas.loyaltycard.exception.AdminNotFoundException;
 import academy.codilas.loyaltycard.exception.PasswordIncorrectException;
@@ -24,20 +25,9 @@ public class LoginServiceImpl implements LoginService {
         this.tokenService = tokenService;
     }
 
-    public boolean loginAdmin(String email, String rawPassword) {
-        Optional<AdminEntity> adminOpt = adminRepository.findByEmail(email);
-
-        if (adminOpt.isPresent()) {
-            AdminEntity admin = adminOpt.get();
-            return passwordEncoder.matches(rawPassword, admin.getPassword());
-        }
-
-        return false;
-    }
-
     @Override
     public String login(String email, String password) {
-        Optional<AdminEntity> adminOpt = adminRepository.findByEmail(email);
+        Optional<Admin> adminOpt = adminRepository.findByEmail(email);
         if (adminOpt.isEmpty()) {
             throw new AdminNotFoundException("Admin not found");
         }

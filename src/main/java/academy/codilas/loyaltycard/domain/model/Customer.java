@@ -9,20 +9,18 @@ public class Customer {
     private String phone;
     private String name;
     private String email;
-    private String password;
 
     public Customer() {
     }
 
-    public Customer(String phone, String name, String email, String password) {
+    public Customer(UUID id, String phone, String name, String email) {
         this.id = id;
         this.phone = phone;
         this.name = name;
         this.email = email;
-        this.password = password;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -52,14 +50,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void update(Customer customer) {

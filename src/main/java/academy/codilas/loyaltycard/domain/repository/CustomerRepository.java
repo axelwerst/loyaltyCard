@@ -1,16 +1,18 @@
 package academy.codilas.loyaltycard.domain.repository;
 
 
-import academy.codilas.loyaltycard.repository.entity.CustomerEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import academy.codilas.loyaltycard.domain.model.Customer;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> {
+public interface CustomerRepository {
+    Customer save(Customer customer);
 
-    Optional<CustomerEntity> findById(UUID uuid);
+    List<Customer> findAll();
 
+    Optional<Customer> findById(UUID customerId);
+
+    void delete(Customer customer);
 }

@@ -1,14 +1,19 @@
 package academy.codilas.loyaltycard.domain.repository;
 
-import academy.codilas.loyaltycard.repository.entity.AdminEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import academy.codilas.loyaltycard.domain.model.Admin;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface AdminRepository extends JpaRepository<AdminEntity, UUID> {
+public interface AdminRepository {
+    Admin save(Admin admin);
 
-    Optional<AdminEntity> findByEmail(String email);
+    List<Admin> findAll();
+
+    Optional<Admin> findById(UUID adminId);
+
+    Optional<Admin> findByEmail(String email);
+
+    void delete(Admin admin);
 }

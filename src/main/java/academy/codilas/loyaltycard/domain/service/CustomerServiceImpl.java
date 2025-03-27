@@ -22,13 +22,13 @@ public class CustomerServiceImpl implements CustomerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public Customer createCustomer(Customer customer) {
-        String encodedPassword = passwordEncoder.encode(customer.getPassword());
-        customer.setPassword(encodedPassword);
-
-        return customerRepository.save(customer);
-    }
+//    @Override
+//    public Customer createCustomer(Customer customer) {
+//        String encodedPassword = passwordEncoder.encode(customer.getPassword());
+//        customer.setPassword(encodedPassword);
+//
+//        return customerRepository.save(customer);
+//    }
 
     @Override
     public Customer newCustomer(String email, String phone, String name) {
@@ -55,26 +55,26 @@ public class CustomerServiceImpl implements CustomerService {
         return null;
     }
 
-    @Override
-    public Customer getCustomerById(UUID customerId) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
-
-        return customer.orElseThrow(() -> new CustomerNotFoundException(customerId));
-    }
-
-    @Override
-    public Customer updateCustomer(UUID customerId, Customer customerToUpdateFrom) {
-        Customer customer = getCustomerById(customerId);
-
-        customer.update(customerToUpdateFrom);
-
-        return customerRepository.save(customer);
-    }
-
-    @Override
-    public void deleteCustomer(UUID customerId) {
-        Customer customer = getCustomerById(customerId);
-
-        customerRepository.delete(customer);
-    }
+//    @Override
+//    public Customer getCustomerById(UUID customerId) {
+//        Optional<Customer> customer = customerRepository.findById(customerId);
+//
+//        return customer.orElseThrow(() -> new CustomerNotFoundException(customerId));
+//    }
+//
+//    @Override
+//    public Customer updateCustomer(UUID customerId, Customer customerToUpdateFrom) {
+//        Customer customer = getCustomerById(customerId);
+//
+//        customer.update(customerToUpdateFrom);
+//
+//        return customerRepository.save(customer);
+//    }
+//
+//    @Override
+//    public void deleteCustomer(UUID customerId) {
+//        Customer customer = getCustomerById(customerId);
+//
+//        customerRepository.delete(customer);
+//    }
 }
