@@ -168,6 +168,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AdminLoginResponse'
 
+  /admins/register:
+    post:
+      summary: Регистрация нового администратора
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminRegister'
+      responses:
+        '201':
+          description: Администратор успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRegisterResponse'
+
 components:
   schemas:
     NewCustomer:
@@ -318,3 +335,30 @@ components:
         role:
           type: string
           enum: [manager, employee]
+
+    AdminRegister:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Иван Иванов
+        email:
+          type: string
+          format: email
+          example: admin@example.com
+        password:
+          type: string
+          format: password
+          example: StrongPass123!
+      required:
+        - name
+        - email
+        - password
+
+    AdminRegisterResponse:
+      type: object
+      properties:
+        adminID:
+          type: integer
+        message:
+          type: string

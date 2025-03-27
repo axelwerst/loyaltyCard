@@ -2,20 +2,22 @@ package academy.codilas.loyaltycard.repository.entity;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "customerid")
-    private String id;
+    private UUID id;
     @Column
     private String name;
     @Column
     private String phone;
     @Column
     private String email;
-    public CustomerEntity(String id, String name, String email, String phone) {
+    public CustomerEntity(UUID id, String name, String email, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -26,7 +28,7 @@ public class CustomerEntity {
 
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -42,7 +44,7 @@ public class CustomerEntity {
         return email;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

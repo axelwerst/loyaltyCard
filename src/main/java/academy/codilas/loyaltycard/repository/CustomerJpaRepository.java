@@ -1,17 +1,14 @@
 package academy.codilas.loyaltycard.repository;
 
+import java.util.Optional;
+import java.util.UUID;
 
 import academy.codilas.loyaltycard.repository.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.yaml.snakeyaml.events.Event;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<CustomerEntity, Event.ID> {
+public interface CustomerJpaRepository extends JpaRepository<CustomerEntity, UUID> {
 
-    Optional<CustomerEntity> findById(UUID uuid);
-
+    Optional<CustomerEntity> findByEmail(String email);
 }

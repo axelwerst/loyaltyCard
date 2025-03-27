@@ -2,10 +2,9 @@ package academy.codilas.loyaltycard.controller;
 
 import academy.codilas.loyaltycard.controller.DTO.CustomerDTO;
 import academy.codilas.loyaltycard.controller.DTO.ErrorDTO;
-import academy.codilas.loyaltycard.controller.DTO.NewCustomerDTO;
-import academy.codilas.loyaltycard.exception.CustomerNotFoundExeption;
-import academy.codilas.loyaltycard.service.CustomerService;
-import academy.codilas.loyaltycard.service.domain.Customer;
+import academy.codilas.loyaltycard.exception.CustomerNotFoundException;
+import academy.codilas.loyaltycard.domain.service.CustomerService;
+import academy.codilas.loyaltycard.domain.model.Customer;
 import academy.codilas.loyaltycard.mapper.CustomerMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable String customerId) throws CustomerNotFoundExeption {
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable String customerId) throws CustomerNotFoundException {
 
         Customer customer = customerService.getCustomerById(customerId);
 
@@ -56,7 +55,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable String customerId) throws CustomerNotFoundExeption {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable String customerId) throws CustomerNotFoundException {
         customerService.deleteCustomer(customerId);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -73,7 +72,7 @@ public class CustomerController {
     @PutMapping("/{customerId}")
     public ResponseEntity<CustomerDTO> updateCustomer(
             @PathVariable String customerId,
-            @RequestBody NewCustomerDTO updatedCustomerDTO) throws CustomerNotFoundExeption {
+            @RequestBody NewCustomerDTO updatedCustomerDTO) throws CustomerNotFoundException {
         Customer updatedCustomer = customerService.updateCustomer(
                 updatedCustomerDTO.getName(),
                 updatedCustomerDTO.getEmail(),
@@ -86,8 +85,8 @@ public class CustomerController {
                 .body(updatedCustomerDTOResponse);
     }
 
-    @ExceptionHandler(CustomerNotFoundExeption.class)
-    public ResponseEntity<ErrorDTO> handleCustomerNotFoundException(CustomerNotFoundExeption e) {
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleCustomerNotFoundException(CustomerNotFoundException e) {
 
         return new ResponseEntity<>(new ErrorDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
