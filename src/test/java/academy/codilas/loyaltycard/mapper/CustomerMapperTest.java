@@ -19,9 +19,9 @@ class CustomerMapperTest {
     void shouldMapDomainToDto() {
         // given
         Customer customer = new Customer(
-                UUID.fromString("Nikita",),
+                UUID.fromString("Nikita"),
 
-                "ddsds",
+                "1234567890",
                 "email",
                 "1234Qwerty!"
         );
@@ -53,18 +53,17 @@ class CustomerMapperTest {
         assertNull(customerDTO.getId());
         assertEquals("Nikita", customer.getName());
         assertEquals("Phone", customer.getEmail());
-        assertEquals("email", customer.getPassword());
+        assertEquals("email", customer.getEmail());
     }
 
     @Test
     void shouldMapEntityToDomain() {
         // given
         CustomerEntity customerEntity = new CustomerEntity(
-                UUID.fromString("Nikita"),
-
-                "Phone",
-                "email!",
-                Collections.emptyList()
+                UUID.fromString("488352d9-ae2f-4599-85a0-ae938dc3db77"),
+                "Nikita",
+                "email",
+                "Phone"
         );
 
         // when

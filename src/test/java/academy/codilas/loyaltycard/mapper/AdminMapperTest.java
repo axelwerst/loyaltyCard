@@ -29,8 +29,8 @@ class AdminMapperTest {
         AdminDTO adminDTO = adminMapper.toDTO(admin);
 
         // then
-        assertEquals(admin.getId().toString(), adminDTO.getId());
-        assertEquals(admin.getAdminName(), adminDTO.getAdminName());
+        assertEquals(admin.getId(), adminDTO.getId());
+        assertEquals(admin.getName(), adminDTO.getName());
         assertEquals(admin.getEmail(), adminDTO.getEmail());
         assertEquals(admin.getPassword(), adminDTO.getPassword());
     }
@@ -38,11 +38,11 @@ class AdminMapperTest {
     @Test
     void shouldMapDtoToDomain() {
         // given
-        AdminDTO adminDTO= new AdminDTO(
+        AdminDTO adminDTO = new AdminDTO(
                 null,
                 "Nikita",
-                "123456789",
-                "test@gmail.com"
+                "test@gmail.com",
+                "123456789"
         );
 
         // when
@@ -50,27 +50,28 @@ class AdminMapperTest {
 
         // then
         assertNull(adminDTO.getId());
-        assertEquals("Nikita", admin.getAdminName());
-        assertEquals("123456789", admin.getEmail());
-        assertEquals("test@gmail.com", admin.getPassword());
+        assertEquals("Nikita", admin.getName());
+        assertEquals("test@gmail.com", admin.getEmail());
+        assertEquals("123456789", admin.getPassword());
     }
 
     @Test
     void shouldMapEntityToDomain() {
         // given
         AdminEntity adminEntity = new AdminEntity(
-                UUID.fromString("Nikita",
+                UUID.fromString("488352d9-ae2f-4599-85a0-ae938dc3db77"),
+                "Nikita",
                 "email",
-                "1234Qwerty!",
-                Collections.emptyList()
-        );
+                "1234Qwerty!"
+
+                );
 
         // when
         Admin admin = adminMapper.toDomain(adminEntity);
 
         // then
         assertEquals(adminEntity.getId(), admin.getId());
-        assertEquals(adminEntity.getAdminName(), admin.getAdminName());
+        assertEquals(adminEntity.getName(), admin.getName());
         assertEquals(adminEntity.getEmail(), admin.getEmail());
         assertEquals(adminEntity.getPassword(), admin.getPassword());
     }
@@ -79,9 +80,8 @@ class AdminMapperTest {
     void shouldMapDomainToEntity() {
         // given
         Admin admin = new Admin(
-                UUID.fromString("Nikita"),
-
-                " ",
+                UUID.fromString("488352d9-ae2f-4599-85a0-ae938dc3db77"),
+                "Nikita",
                 "email",
                 "1234Qwerty!"
         );
@@ -91,7 +91,7 @@ class AdminMapperTest {
 
         // then
         assertEquals(adminEntity.getId(), admin.getId());
-        assertEquals(adminEntity.getAdminName(), admin.getAdminName());
+        assertEquals(adminEntity.getName(), admin.getName());
         assertEquals(adminEntity.getEmail(), admin.getEmail());
         assertEquals(adminEntity.getPassword(), admin.getPassword());
 

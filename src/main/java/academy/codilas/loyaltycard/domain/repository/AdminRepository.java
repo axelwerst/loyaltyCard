@@ -15,5 +15,7 @@ public interface AdminRepository {
 
     Optional<Admin> findByEmail(String email);
 
+    Optional<Admin> findByEmailIgnoreCase(String email);
+
     void delete(Admin admin);
 }

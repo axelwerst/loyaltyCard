@@ -46,6 +46,10 @@ public class AdminRepositoryImpl implements AdminRepository {
     public Optional<Admin> findByEmail(String email) {
         return adminJpaRepository.findByEmail(email).map(adminMapper::toDomain);
     }
+    @Override
+    public Optional<Admin> findByEmailIgnoreCase(String email) {
+        return adminJpaRepository.findByEmail(email.toLowerCase()).map(adminMapper::toDomain);
+    }
 
     @Override
     public void delete(Admin admin) {

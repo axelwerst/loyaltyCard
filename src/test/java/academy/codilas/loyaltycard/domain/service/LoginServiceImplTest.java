@@ -11,6 +11,7 @@ import academy.codilas.loyaltycard.domain.model.Admin;
 import academy.codilas.loyaltycard.domain.repository.AdminRepository;
 import academy.codilas.loyaltycard.exception.AdminNotFoundException;
 import academy.codilas.loyaltycard.exception.PasswordIncorrectException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
